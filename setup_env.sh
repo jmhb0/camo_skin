@@ -10,7 +10,7 @@ echo "Activating environment..."
 source .venv/bin/activate
 
 echo "Installing dependencies..."
-uv pip install torch torchvision transformers pillow matplotlib numpy
+uv pip install torch torchvision transformers pillow matplotlib numpy ipdb
 
 echo ""
 echo "Environment setup complete!"
