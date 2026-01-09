@@ -1,0 +1,4 @@
+# Command used to generate this visualization
+# Generated: 2026-01-09T10:19:30.995228
+
+python /Users/jamesburgess/camo_skin/trajectory_frame_s.py /Users/jamesburgess/camo_skin/data/paper_vids/vid1_41586_2025_9948_MOESM6_ESM.mp4 --reference-videos /Users/jamesburgess/camo_skin/data/paper_vids/vid2_41586_2025_9948_MOESM7_ESM.mp4 /Users/jamesburgess/camo_skin/data/paper_vids/vid3_41586_2025_9948_MOESM8_ESM.mp4

@@ -64,3 +64,60 @@ Results are saved to `results/<dataset_name>/`:
 - `similarity_heatmap_<model>.png` - Heatmap of the full similarity matrix
 
 When using `--layer`, output files include the layer number (e.g., `similarity_grid_dinov2_layer3.png`).
+
+## Video Frame Trajectory Analysis
+
+Visualize how video frames move through DINOv2 embedding space over time.
+
+### Usage
+
+```bash
+python trajectory_frame_s.py <video_path> [options]
+```
+
+### Options
+
+| Option | Values | Default | Description |
+|--------|--------|---------|-------------|
+| `video_path` | path | required | Main video file to analyze |
+| `--layer` | `1-12` | final | DINOv2 layer to use |
+| `--fps` | float | `1.0` | Frames per second to extract |
+| `--reference-videos` | paths | none | Additional videos for PCA context |
+
+### Examples
+
+```bash
+# Basic usage - extract 1 frame/sec, use final layer
+python trajectory_frame_s.py data/paper_vids/vid1_41586_2025_9948_MOESM6_ESM.mp4
+
+# Use early layer (more texture-sensitive)
+python trajectory_frame_s.py data/paper_vids/vid1_41586_2025_9948_MOESM6_ESM.mp4 --layer 2
+
+# Extract more frames
+python trajectory_frame_s.py data/paper_vids/vid1_41586_2025_9948_MOESM6_ESM.mp4 --fps 5
+
+# Compare against reference videos
+python trajectory_frame_s.py data/paper_vids/vid1_41586_2025_9948_MOESM6_ESM.mp4 \
+    --reference-videos data/paper_vids/vid2_41586_2025_9948_MOESM7_ESM.mp4 \
+                       data/paper_vids/vid3_41586_2025_9948_MOESM8_ESM.mp4
+```
+
+### Batch Processing
+
+Run analysis for all paper videos:
+
+```bash
+./scripts/run_trajectory_analysis.sh
+```
+
+### Output
+
+Results are saved to `results/trajectory_frame_s/<video_name>/`:
+- `trajectory_fps<N>.png` - Trajectory visualization
+- `trajectory_fps<N>.txt` - Command used to generate it
+
+Filename pattern: `trajectory_fps{N}[_layer{L}][_refs].{png,txt}`
+
+The visualization shows:
+- **Main video**: Connected trajectory with start (square) and end (triangle) markers
+- **Reference videos**: Scattered X markers in different colors (if provided)
